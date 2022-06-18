@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./App.css";
 import Form from "./components/form/Form";
 import Input from "./components/input/Input";
+import { isDefined } from "./functions/is-defined/is-defined";
+import { shiftCharacter } from "./functions/shift-character/shift-character";
 
 const App = () => {
    const [value, setValue] = useState<Record<string, string>>();
@@ -14,11 +16,21 @@ const App = () => {
       <div>
          <div style={{ maxWidth: "300px" }}>
             <Form onStateChange={handleOnStateChange}>
-               <Input label="Label" name="test-1" />
-               <Input label="Label" name="test-2" />
+               <Input label="Character" name="char" maxLength={1} />
+               <Input label="Offset Value" name="offset" />
+               <Input
+                  label="Encoded Character"
+                  name="encoded-char"
+                  readOnly={true}
+                  disabled={true}
+                  value={
+                     value?.["char"] && isDefined(+value?.["offset"])
+                        ? shiftCharacter(value["char"], +value["offset"])
+                        : ""
+                  }
+               />
             </Form>
          </div>
-         <div>The value of the control is {value?.["test-1"]}</div>
       </div>
    );
 };
