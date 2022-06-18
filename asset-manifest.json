@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cypher-tools/static/css/main.eb2874fa.css",
+    "main.js": "/cypher-tools/static/js/main.0a8a1ae2.js",
+    "static/js/787.26899f86.chunk.js": "/cypher-tools/static/js/787.26899f86.chunk.js",
+    "index.html": "/cypher-tools/index.html",
+    "main.eb2874fa.css.map": "/cypher-tools/static/css/main.eb2874fa.css.map",
+    "main.0a8a1ae2.js.map": "/cypher-tools/static/js/main.0a8a1ae2.js.map",
+    "787.26899f86.chunk.js.map": "/cypher-tools/static/js/787.26899f86.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.eb2874fa.css",
+    "static/js/main.0a8a1ae2.js"
+  ]
+}
