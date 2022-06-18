@@ -7,7 +7,9 @@ const App = () => {
 
   return (
     <div>
-      <Input label='Label' valueUpdated={(newVal) => setValue(newVal)} />
+      <div style={{ maxWidth: '300px' }}>
+        <Input label='Label' onChange={(event) => setValue(event.target.value)} />
+      </div>
       <br />
       <div>
         The value of the control is {value}
