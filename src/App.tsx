@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Form from "./components/form/Form";
 import Input from "./components/input/Input";
@@ -15,8 +15,8 @@ const App = () => {
    return (
       <div style={{ maxWidth: "300px" }}>
          <Form onStateChange={setValue}>
-            <Input label="Character" name="char" maxLength={1} pattern="^[a-zA-Z]$" />
-            <Input label="Offset Value" name="offset" pattern="^-?[0-9]*$" />
+            <Input label="Character" name="char" maxLength={1} pattern={/^[a-zA-Z]$/} />
+            <Input label="Offset Value" name="offset" pattern={/^-?[0-9]*$/} />
             <Input label="Encoded Character" name="encoded-char" readOnly disabled value={getEncodedCharacter()} />
          </Form>
       </div>

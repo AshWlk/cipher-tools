@@ -3,8 +3,9 @@ import { filterObjectKeys } from "../../functions/filter-object-keys/filter-obje
 import "./Input.css";
 
 export interface InputProps
-   extends React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
+   extends Omit<React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, "pattern"> {
    label: string;
+   pattern?: RegExp;
 }
 
 const Input = (props: InputProps): ReactElement<InputProps> => {
@@ -23,7 +24,12 @@ const Input = (props: InputProps): ReactElement<InputProps> => {
    return (
       <div className="Input">
          <label>{props.label}</label>
-         <input {...filterObjectKeys(props, "label")} value={value} onChange={handleValueChanged} />
+         <input
+            {...filterObjectKeys(props, "label")}
+            pattern={props.pattern?.source}
+            value={value}
+            onChange={handleValueChanged}
+         />
       </div>
    );
 };
