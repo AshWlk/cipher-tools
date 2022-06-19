@@ -1,4 +1,5 @@
 import React, { ReactElement, useEffect, useState } from "react";
+import { filterObjectKeys } from "../../functions/filter-object-keys/filter-object-keys";
 import "./Input.css";
 
 export interface InputProps
@@ -22,7 +23,7 @@ const Input = (props: InputProps): ReactElement<InputProps> => {
    return (
       <div className="Input">
          <label>{props.label}</label>
-         <input {...props} value={value} onChange={handleValueChanged} />
+         <input {...filterObjectKeys(props, "label")} value={value} onChange={handleValueChanged} />
       </div>
    );
 };

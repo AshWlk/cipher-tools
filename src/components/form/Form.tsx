@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from "react";
+import { filterObjectKeys } from "../../functions/filter-object-keys/filter-object-keys";
 import { InputProps } from "../input/Input";
 
 export interface FormProps extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
@@ -29,7 +30,7 @@ const Form = (props: FormProps): ReactElement<FormProps> => {
       }));
    };
 
-   return <form {...props}>{mapChildren(props.children)}</form>;
+   return <form {...filterObjectKeys(props, "state", "onStateChange")}>{mapChildren(props.children)}</form>;
 };
 
 export default Form;
