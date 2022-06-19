@@ -1,11 +1,16 @@
 import { render } from "@testing-library/react";
-import App from "./App";
+import Form from "./Form";
 
-describe("App", () => {
+describe("Form", () => {
    it("should render component", () => {
       // Arrange
       // Act
-      const view = render(<App />);
+      const view = render(
+         <Form>
+            <div></div>
+            <div></div>
+         </Form>
+      );
 
       // Assert
       expect(view.baseElement).toBeTruthy();
