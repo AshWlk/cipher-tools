@@ -1,15 +1,14 @@
 import React, { ReactElement, useState } from "react";
-import { filterObjectKeys } from "../../functions/filter-object-keys/filter-object-keys";
 import { InputProps } from "../input/Input";
 
 export interface FormProps extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {
    children: ReactElement<InputProps>[];
-   state?: Record<string, string>;
-   onStateChange?: (newState: Record<string, string>) => void;
+   value?: Record<string, string>;
+   onValueChange?: (newState: Record<string, string>) => void;
 }
 
-const Form = (props: FormProps): ReactElement<FormProps> => {
-   const [formState, setFormState] = useState(props.state);
+const Form = ({ children, value, onValueChange, ...otherProps }: FormProps): ReactElement<FormProps> => {
+   const [formState, setFormState] = useState(value);
    const handleStateChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newFormState = {
          ...formState,
@@ -17,7 +16,7 @@ const Form = (props: FormProps): ReactElement<FormProps> => {
       };
 
       setFormState(newFormState);
-      props.onStateChange?.(newFormState);
+      onValueChange?.(newFormState);
    };
 
    const mapChildren = (children: ReactElement<InputProps>[]): ReactElement<InputProps>[] => {
@@ -30,7 +29,7 @@ const Form = (props: FormProps): ReactElement<FormProps> => {
       }));
    };
 
-   return <form {...filterObjectKeys(props, "state", "onStateChange")}>{mapChildren(props.children)}</form>;
+   return <form {...otherProps}>{mapChildren(children)}</form>;
 };
 
 export default Form;

@@ -1,5 +1,4 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { filterObjectKeys } from "../../functions/filter-object-keys/filter-object-keys";
 import "./Input.css";
 
 export interface InputProps
@@ -8,28 +7,23 @@ export interface InputProps
    pattern?: RegExp;
 }
 
-const Input = (props: InputProps): ReactElement<InputProps> => {
-   const [value, setValue] = useState(props.value || "");
+const Input = ({ label, pattern, onChange, value, ...otherProps }: InputProps): ReactElement<InputProps> => {
+   const [inputValue, setInputValue] = useState(value || "");
    const handleValueChanged = (event: React.ChangeEvent<HTMLInputElement>): void => {
-      if (!props.pattern || !event.target.value || event.target.value.match(props.pattern)) {
-         setValue(event.target.value);
-         props.onChange?.(event);
+      if (!pattern || !event.target.value || event.target.value.match(pattern)) {
+         setInputValue(event.target.value);
+         onChange?.(event);
       }
    };
 
    useEffect(() => {
-      setValue(props.value || "");
-   }, [props.value]);
+      setInputValue(value || "");
+   }, [value]);
 
    return (
       <div className="Input">
-         <label>{props.label}</label>
-         <input
-            {...filterObjectKeys(props, "label")}
-            pattern={props.pattern?.source}
-            value={value}
-            onChange={handleValueChanged}
-         />
+         <label>{label}</label>
+         <input {...otherProps} pattern={pattern?.source} value={inputValue} onChange={handleValueChanged} />
       </div>
    );
 };
