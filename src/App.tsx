@@ -12,25 +12,17 @@ const App = () => {
       console.log(state);
    };
 
+   const getEncodedCharacter = (): string => {
+      return value?.char && isDefined(+value?.offset) ? shiftCharacter(value.char, +value.offset) : "";
+   };
+
    return (
-      <div>
-         <div style={{ maxWidth: "300px" }}>
-            <Form onStateChange={handleOnStateChange}>
-               <Input label="Character" name="char" maxLength={1} />
-               <Input label="Offset Value" name="offset" />
-               <Input
-                  label="Encoded Character"
-                  name="encoded-char"
-                  readOnly={true}
-                  disabled={true}
-                  value={
-                     value?.["char"] && isDefined(+value?.["offset"])
-                        ? shiftCharacter(value["char"], +value["offset"])
-                        : ""
-                  }
-               />
-            </Form>
-         </div>
+      <div style={{ maxWidth: "300px" }}>
+         <Form onStateChange={handleOnStateChange}>
+            <Input label="Character" name="char" maxLength={1} pattern="^[a-zA-Z]$" />
+            <Input label="Offset Value" name="offset" pattern="^-?[0-9]*$" />
+            <Input label="Encoded Character" name="encoded-char" readOnly disabled value={getEncodedCharacter()} />
+         </Form>
       </div>
    );
 };

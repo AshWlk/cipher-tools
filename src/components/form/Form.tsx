@@ -7,7 +7,7 @@ export interface FormProps extends React.DetailedHTMLProps<React.FormHTMLAttribu
    onStateChange?: (newState: Record<string, string>) => void;
 }
 
-const Form = (props: FormProps): JSX.Element => {
+const Form = (props: FormProps): ReactElement<FormProps> => {
    const [formState, setFormState] = useState(props.state);
    const handleStateChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
       const newFormState = {
